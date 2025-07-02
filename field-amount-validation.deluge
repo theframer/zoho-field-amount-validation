@@ -1,0 +1,40 @@
+// ==================================================================
+// Zoho Deluge - Validation: Ensure Full Amount matches Total Amount
+// ==================================================================
+//
+// This function validates that the `Full_Amount` field is equal to 
+// the `Total_Price` field in a CRM API request. 
+//
+// If they do not match, it returns an error with a message.
+// Otherwise, it confirms success.
+//
+// Example usage:
+//   validation_rule.validateFullAmount(apiRequestPayload);
+//
+// ------------------------------------------------------------------
+
+map validation_rule.validateFullAmount(string crmAPIRequest)
+{
+    // Convert incoming JSON API request to a Map object
+    entityMap = crmAPIRequest.toMap().get("record");
+
+    // Extract the numeric values from fields
+    total_amount = entityMap.get("Total_Price").toDecimal();
+    full_amount = entityMap.get("Full_Amount").toDecimal();
+
+    // Initialize a response map to store status
+    response = Map();
+
+    // Validate: Check if full amount matches total amount
+    if (total_amount != full_amount) 
+    {
+        response.put("status", "error");
+        response.put("message", "The full amount must be equivalent to the total amount.");
+    } 
+    else 
+    {
+        response.put("status", "success");
+    }
+
+    return response;
+}
