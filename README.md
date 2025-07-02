@@ -8,4 +8,8 @@
 Paste this script inside your Zoho CRM workflow function.
 
 ## License
+<<<<<<< HEAD
 MIT
+=======
+MIT
+>>>>>>> eea3865bcad318b2661a818f1fffd7af75164476
